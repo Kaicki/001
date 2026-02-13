@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Game Hub</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#121212;
+  color:white;
+}
+
+header{
+  background:#1f1f1f;
+  padding:15px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+
+#search{
+  width:90%;
+  max-width:400px;
+  padding:10px;
+  margin:15px auto;
+  display:block;
+  border-radius:8px;
+  border:none;
+  outline:none;
+}
+
+.games{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:15px;
+  padding:20px;
+}
+
+.game{
+  background:#1e1e2f;
+  border-radius:10px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:0.3s;
+  text-align:center;
+}
+
+.game:hover{
+  transform:scale(1.05);
+  background:#2e2e4f;
+}
+
+.game img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+}
+
+.game h3{
+  padding:8px;
+  font-size:14px;
+}
+
+#player{
+  display:none;
+  padding:15px;
+}
+
+#player iframe{
+  width:100%;
+  height:500px;
+  border:none;
+  border-radius:10px;
+}
+
+.back{
+  background:#ff3b3b;
+  border:none;
+  padding:8px 15px;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+  margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>🎮 MEU PAINEL DE JOGOS</header>
+
+<input type="text" id="search" placeholder="Pesquisar jogo..." onkeyup="buscarJogo()">
+
+<div class="games" id="games">
+
+  <div class="game" data-name="Survivor.io" onclick="abrirJogo('https://www.madkidgames.com/full/survivor-io')">
+    <img src="https://img.madkidgames.com/survivor-io.png">
+    <h3>Survivor.io</h3>
+  </div>
+
+  <div class="game" data-name="Subway Surfers" onclick="abrirJogo('https://www.madkidgames.com/full/subway-surfers')">
+    <img src="https://img.madkidgames.com/subway-surfers.png">
+    <h3>Subway Surfers</h3>
+  </div>
+
+</div>
+
+<div id="player">
+  <button class="back" onclick="fecharJogo()">⬅ Voltar</button>
+  <iframe id="gameFrame"></iframe>
+</div>
+
+<script>
+function abrirJogo(link){
+  document.querySelector(".games").style.display="none";
+  document.getElementById("search").style.display="none";
+  document.getElementById("player").style.display="block";
+  document.getElementById("gameFrame").src = link;
+}
+
+function fecharJogo(){
+  document.querySelector(".games").style.display="grid";
+  document.getElementById("search").style.display="block";
+  document.getElementById("player").style.display="none";
+  document.getElementById("gameFrame").src = "";
+}
+
+function buscarJogo(){
+  let input = document.getElementById("search").value.toLowerCase();
+  let jogos = document.querySelectorAll(".game");
+
+  jogos.forEach(function(jogo){
+    let nome = jogo.getAttribute("data-name").toLowerCase();
+    jogo.style.display = nome.includes(input) ? "block" : "none";
+  });
+}
+</script>
+
+</body>
+</html>
