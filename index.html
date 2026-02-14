@@ -3,145 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meu Game Hub</title>
+<title>Tiaflix</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, Helvetica, sans-serif;
-}
-
 body{
-  background:#121212;
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0a0a0a;
   color:white;
 }
 
 header{
-  background:#1f1f1f;
-  padding:15px;
-  text-align:center;
-  font-size:22px;
-  font-weight:bold;
-  letter-spacing:2px;
-}
-
-#search{
-  width:90%;
-  max-width:400px;
-  padding:10px;
-  margin:15px auto;
-  display:block;
-  border-radius:8px;
-  border:none;
-  outline:none;
-}
-
-.games{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:15px;
+  background:black;
   padding:20px;
+  text-align:center;
+  font-size:28px;
+  font-weight:bold;
+  color:#ff0000;
+  box-shadow:0 0 25px #ff0000;
 }
 
-.game{
-  background:#1e1e2f;
-  border-radius:10px;
-  overflow:hidden;
+.tabs{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin:20px 0;
+}
+
+.tab-btn{
+  padding:10px 20px;
+  background:#1a0000;
+  border:none;
+  color:white;
+  cursor:pointer;
+  border-radius:8px;
+  font-weight:bold;
+  transition:0.3s;
+  box-shadow:0 0 10px #ff000050;
+}
+
+.tab-btn:hover{
+  background:#330000;
+  box-shadow:0 0 20px #ff0000;
+}
+
+.content{
+  display:none;
+}
+
+.active{
+  display:block;
+}
+
+.section{
+  margin:30px 0;
+}
+
+.section h2{
+  margin-left:20px;
+  color:#ff4d4d;
+  text-shadow:0 0 10px #ff0000;
+}
+
+.grid{
+  display:flex;
+  gap:15px;
+  padding:15px;
+  overflow-x:auto;
+}
+
+.card{
+  min-width:200px;
+  padding:30px 15px;
+  background:#1a0000;
+  border-radius:12px;
+  text-align:center;
   cursor:pointer;
   transition:0.3s;
-  text-align:center;
+  font-weight:bold;
+  box-shadow:0 0 10px #ff000050;
 }
 
-.game:hover{
-  transform:scale(1.05);
-  background:#2e2e4f;
+.card:hover{
+  transform:scale(1.1);
+  background:#330000;
+  box-shadow:0 0 25px #ff0000;
 }
 
-.game img{
+.viewer{
+  position:fixed;
+  top:0;
+  left:0;
   width:100%;
-  height:120px;
-  object-fit:cover;
-}
-
-.game h3{
-  padding:8px;
-  font-size:14px;
-}
-
-#player{
+  height:100%;
+  background:black;
   display:none;
+  flex-direction:column;
+  z-index:999;
+}
+
+.viewer iframe{
+  flex:1;
+  border:none;
+}
+
+.close{
+  background:#ff0000;
   padding:15px;
-}
-
-#player iframe{
-  width:100%;
-  height:500px;
-  border:none;
-  border-radius:10px;
-}
-
-.back{
-  background:#ff3b3b;
-  border:none;
-  padding:8px 15px;
-  color:white;
-  border-radius:6px;
+  text-align:center;
   cursor:pointer;
-  margin-bottom:10px;
+  font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<header>🎮 MEU PAINEL DE JOGOS</header>
+<header>TIAFLIX</header>
 
-<input type="text" id="search" placeholder="Pesquisar jogo..." onkeyup="buscarJogo()">
+<div class="tabs">
+  <button class="tab-btn" onclick="mostrarAba('fundamental')">Ensino Fundamental</button>
+  <button class="tab-btn" onclick="mostrarAba('medio')">Ensino Médio</button>
+</div>
 
-<div class="games" id="games">
+<!-- FUNDAMENTAL -->
+<div id="fundamental" class="content active">
 
-  <div class="game" data-name="Survivor.io" onclick="abrirJogo('https://www.madkidgames.com/full/survivor-io')">
-    <img src="https://img.madkidgames.com/survivor-io.png">
-    <h3>Survivor.io</h3>
-  </div>
+<div class="section">
+<h2>6º Ano</h2>
+<div class="grid">
+<div class="card" onclick="abrirLivro('LINK')">Português</div>
+<div class="card" onclick="abrirLivro('LINK')">Matemática</div>
+<div class="card" onclick="abrirLivro('LINK')">Ciências</div>
+</div>
+</div>
 
-  <div class="game" data-name="Subway Surfers" onclick="abrirJogo('https://www.madkidgames.com/full/subway-surfers')">
-    <img src="https://img.madkidgames.com/subway-surfers.png">
-    <h3>Subway Surfers</h3>
-  </div>
+<div class="section">
+<h2>7º Ano</h2>
+<div class="grid">
+<div class="card" onclick="abrirLivro('LINK')">Português</div>
+<div class="card" onclick="abrirLivro('LINK')">Matemática</div>
+</div>
+</div>
+
+<div class="section">
+<h2>8º Ano</h2>
+<div class="grid">
+<div class="card" onclick="abrirLivro('LINK')">Português</div>
+<div class="card" onclick="abrirLivro('LINK')">Matemática</div>
+</div>
+</div>
+
+<div class="section">
+<h2>9º Ano</h2>
+<div class="grid">
+<div class="card" onclick="abrirLivro('LINK')">Português</div>
+<div class="card" onclick="abrirLivro('LINK')">Matemática</div>
+</div>
+</div>
 
 </div>
 
-<div id="player">
-  <button class="back" onclick="fecharJogo()">⬅ Voltar</button>
-  <iframe id="gameFrame"></iframe>
+<!-- ENSINO MÉDIO -->
+<div id="medio" class="content">
+
+<div class="section">
+<h2>1º Ensino Médio</h2>
+<div class="grid">
+<div class="card" onclick="abrirLivro('LINK')">Português</div>
+<div class="card" onclick="abrirLivro('LINK')">Matemática</div>
+</div>
+</div>
+
+<div class="section">
+<h2>2º Ensino Médio</h2>
+<div class="grid">
+<div class="card" onclick="abrirLivro('LINK')">Português</div>
+<div class="card" onclick="abrirLivro('LINK')">Matemática</div>
+</div>
+</div>
+
+<div class="section">
+<h2>3º Ensino Médio</h2>
+<div class="grid">
+<div class="card" onclick="abrirLivro('LINK')">Português</div>
+<div class="card" onclick="abrirLivro('LINK')">Matemática</div>
+</div>
+</div>
+
+</div>
+
+<!-- MODAL PDF -->
+<div class="viewer" id="viewer">
+<div class="close" onclick="fechar()">Fechar</div>
+<iframe id="pdfFrame"></iframe>
 </div>
 
 <script>
-function abrirJogo(link){
-  document.querySelector(".games").style.display="none";
-  document.getElementById("search").style.display="none";
-  document.getElementById("player").style.display="block";
-  document.getElementById("gameFrame").src = link;
+function mostrarAba(aba){
+  document.getElementById("fundamental").classList.remove("active");
+  document.getElementById("medio").classList.remove("active");
+  document.getElementById(aba).classList.add("active");
 }
 
-function fecharJogo(){
-  document.querySelector(".games").style.display="grid";
-  document.getElementById("search").style.display="block";
-  document.getElementById("player").style.display="none";
-  document.getElementById("gameFrame").src = "";
+function abrirLivro(link){
+  document.getElementById("viewer").style.display="flex";
+  document.getElementById("pdfFrame").src=link;
 }
 
-function buscarJogo(){
-  let input = document.getElementById("search").value.toLowerCase();
-  let jogos = document.querySelectorAll(".game");
-
-  jogos.forEach(function(jogo){
-    let nome = jogo.getAttribute("data-name").toLowerCase();
-    jogo.style.display = nome.includes(input) ? "block" : "none";
-  });
+function fechar(){
+  document.getElementById("viewer").style.display="none";
+  document.getElementById("pdfFrame").src="";
 }
 </script>
 
